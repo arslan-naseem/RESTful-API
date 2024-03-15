@@ -40,7 +40,7 @@ class _CountryStatsScreenState extends State<CountryStatsScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: true,
       child: Scaffold(
         appBar: AppBar(
             centerTitle: true,

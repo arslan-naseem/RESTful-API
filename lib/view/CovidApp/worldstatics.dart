@@ -32,118 +32,121 @@ class _WorldStatsState extends State<WorldStats> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text('WorldStats'),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.width * .1,
-          ),
-          FutureBuilder(
-              future: statesServices.fetchdata(),
-              builder: (context, AsyncSnapshot<WorldStatesModel> snapshot) {
-                if (!snapshot.hasData) {
-                  return Expanded(
-                      child: SpinKitFadingCircle(
-                    color: Colors.white,
-                    size: 50.0,
-                    controller: _controller,
-                  ));
-                } else {
-                  return Column(
-                    children: [
-                      PieChart(
-                        dataMap: {
-                          'total': double.parse(
-                              snapshot.data!.updatedInfo!.cases.toString()),
-                          'recovered': double.parse(snapshot
-                              .data!.updatedInfo!.todayRecovered
-                              .toString()),
-                          'death': double.parse(
-                              snapshot.data!.updatedInfo!.deaths.toString()),
-                        },
-                        chartRadius: MediaQuery.of(context).size.width / 2.9,
-                        animationDuration: const Duration(milliseconds: 1200),
-                        chartType: ChartType.ring,
-                        colorList: colorList,
-                        legendOptions: const LegendOptions(
-                            legendPosition: LegendPosition.left),
-                        chartValuesOptions: const ChartValuesOptions(
-                            showChartValuesInPercentage: true),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.height * .02,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: const Text('WorldStats'),
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.width * .1,
+            ),
+            FutureBuilder(
+                future: statesServices.fetchdata(),
+                builder: (context, AsyncSnapshot<WorldStatesModel> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Expanded(
+                        child: SpinKitFadingCircle(
+                      color: Colors.white,
+                      size: 50.0,
+                      controller: _controller,
+                    ));
+                  } else {
+                    return Column(
+                      children: [
+                        PieChart(
+                          dataMap: {
+                            'total': double.parse(
+                                snapshot.data!.updatedInfo!.cases.toString()),
+                            'recovered': double.parse(snapshot
+                                .data!.updatedInfo!.todayRecovered
+                                .toString()),
+                            'death': double.parse(
+                                snapshot.data!.updatedInfo!.deaths.toString()),
+                          },
+                          chartRadius: MediaQuery.of(context).size.width / 2.9,
+                          animationDuration: const Duration(milliseconds: 1200),
+                          chartType: ChartType.ring,
+                          colorList: colorList,
+                          legendOptions: const LegendOptions(
+                              legendPosition: LegendPosition.left),
+                          chartValuesOptions: const ChartValuesOptions(
+                              showChartValuesInPercentage: true),
                         ),
-                        child: Card(
-                          color: Colors.white,
-                          child: Column(
-                            children: [
-                              ReuseableRow(
-                                  title: 'Total',
-                                  value: snapshot.data!.updatedInfo!.cases
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'Recovered',
-                                  value: snapshot
-                                      .data!.updatedInfo!.todayRecovered
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'Deaths',
-                                  value: snapshot.data!.updatedInfo!.deaths
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'TodayCases',
-                                  value: snapshot.data!.updatedInfo!.todayCases
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'TodayRecoverd',
-                                  value: snapshot
-                                      .data!.updatedInfo!.todayRecovered
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'TodayDeath',
-                                  value: snapshot.data!.updatedInfo!.deaths
-                                      .toString()),
-                              ReuseableRow(
-                                  title: 'Active',
-                                  value: snapshot.data!.updatedInfo!.active
-                                      .toString()),
-                            ],
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: MediaQuery.of(context).size.height * .02,
                           ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) =>
-                                      const CountryStatsScreen())));
-                        },
-                        child: Container(
-                          height: 40,
-                          width: 280,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: Colors.green.shade800),
-                          child: const Center(
-                            child: Text(
-                              'Track',
-                              style: TextStyle(color: Colors.white),
+                          child: Card(
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                ReuseableRow(
+                                    title: 'Total',
+                                    value: snapshot.data!.updatedInfo!.cases
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'Recovered',
+                                    value: snapshot
+                                        .data!.updatedInfo!.todayRecovered
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'Deaths',
+                                    value: snapshot.data!.updatedInfo!.deaths
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'TodayCases',
+                                    value: snapshot.data!.updatedInfo!.todayCases
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'TodayRecoverd',
+                                    value: snapshot
+                                        .data!.updatedInfo!.todayRecovered
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'TodayDeath',
+                                    value: snapshot.data!.updatedInfo!.deaths
+                                        .toString()),
+                                ReuseableRow(
+                                    title: 'Active',
+                                    value: snapshot.data!.updatedInfo!.active
+                                        .toString()),
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-              }),
-        ],
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) =>
+                                        const CountryStatsScreen())));
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 280,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: Colors.green.shade800),
+                            child: const Center(
+                              child: Text(
+                                'Track',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                }),
+          ],
+        ),
       ),
     );
   }
