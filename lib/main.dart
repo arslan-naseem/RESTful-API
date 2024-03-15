@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:restapi/view/CovidApp/splash_screen.dart';
-import 'package:restapi/view/PostApis/signup.dart';
-import 'package:restapi/view/PostApis/uploadimage.dart';
 
 void main() {
   runApp(const MyApp());

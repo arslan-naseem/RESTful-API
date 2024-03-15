@@ -149,6 +149,7 @@ class _WorldStatsState extends State<WorldStats> with TickerProviderStateMixin {
   }
 }
 
+// ignore: must_be_immutable
 class ReuseableRow extends StatelessWidget {
   String title, value;
   ReuseableRow({super.key, required this.title, required this.value});

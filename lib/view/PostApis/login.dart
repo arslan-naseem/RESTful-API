@@ -16,6 +16,7 @@ class _LoginScreenPostApiState extends State<LoginScreenPostApi> {
 
   login(String email, String password) async {
     try {
+      // ignore: prefer_typing_uninitialized_variables
       var data;
       Response response = await post(Uri.parse('https://reqres.in/api/login'),
           body: {'email': email, 'password': password});

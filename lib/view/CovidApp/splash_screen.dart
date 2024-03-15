@@ -1,10 +1,7 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
-
 import 'dart:math' as math;
 
-import 'package:restapi/view/CovidApp/country_list.dart';
+import 'package:flutter/material.dart';
 import 'package:restapi/view/CovidApp/worldstatics.dart';
 
 class SplashScreen extends StatefulWidget {
